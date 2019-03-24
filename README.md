@@ -89,3 +89,8 @@ Source: _2015, comScore Mobile_
 - [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
 - [MDN Article on the Web App Manifest (includes List of all Properties)](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Web App Manifest - Browser Support](http://caniuse.com/#feat=web-app-manifest)
+- [App Install Banner - Google Developers](https://developers.google.com/web/fundamentals/app-install-banners/)
+- [Are Service Workers Ready? - Check Browser Support](https://jakearchibald.github.io/isserviceworkerready/)
+- [Setting up Remote Debugging on Chrome](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
+- [Getting that "Web App Install Banner"](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
+- [Getting Started with Service Workers (don't read too far, there's stuff in there we'll learn later ;-))](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
