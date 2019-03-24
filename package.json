@@ -1,0 +1,23 @@
+{
+  "name": "pwa-sandbox",
+  "version": "1.0.0",
+  "description": "PWA sandbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1 -p 80"
+  },
+  "keywords": [
+    "pwa",
+    "progressive",
+    "web",
+    "app",
+    "complete",
+    "tutorial"
+  ],
+  "author": "Gabriel Freitas",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  },
+  "dependencies": {}
+}
