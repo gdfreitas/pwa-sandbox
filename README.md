@@ -68,5 +68,7 @@ Source: _2015, comScore Mobile_
 
 ## References
 
+[`manifest.json @ Mozilla Developer`](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
+
 Most of Statistics: _2015, comScore Mobile Metrix_  
 [Progressive Web App - The Complete Guide](https://www.udemy.com/progressive-web-app-pwa-the-complete-guide)
