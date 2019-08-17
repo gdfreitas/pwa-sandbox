@@ -3,26 +3,26 @@ var createPostArea = document.querySelector('#create-post');
 var closeCreatePostModalButton = document.querySelector('#close-create-post-modal-btn');
 
 function openCreatePostModal() {
-    createPostArea.style.display = 'block';
+  createPostArea.style.display = 'block';
 
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
 
-        deferredPrompt.userChoice.then(function (choiceResult) {
-            console.log('choiceResult.outcome', choiceResult.outcome);
-            if (choiceResult.outcome === 'dismissed') {
-                console.log('User cancelled installation');
-            } else {
-                console.log('User added to home screen')
-            }
-        });
+    deferredPrompt.userChoice.then(function (choiceResult) {
+      console.log('choiceResult.outcome', choiceResult.outcome);
+      if (choiceResult.outcome === 'dismissed') {
+        console.log('User cancelled installation');
+      } else {
+        console.log('User added to home screen')
+      }
+    });
 
-        deferredPrompt = null;
-    }
+    deferredPrompt = null;
+  }
 }
 
 function closeCreatePostModal() {
-    createPostArea.style.display = 'none';
+  createPostArea.style.display = 'none';
 }
 
 shareImageButton.addEventListener('click', openCreatePostModal);
