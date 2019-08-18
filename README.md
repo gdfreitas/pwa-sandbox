@@ -107,6 +107,55 @@ Página da extensão pode ser encontrada em: [Google Chrome Store - Lighthouse](
 - **Geolocation API**: permite acessar a localização do usuário
 - **Media API**: permite acessar dispositivo de câmera e microfone
 
+### Web App Manifest
+
+O manifest do web app fornece informações sobre o aplicativo em formato JSON, serve para que o web app seja apresentado ao usuário de forma semelhante a um aplicativo nativo, por exemplo, ser instalado na tela inicial de um dispositivo, fornecendo aos usuários acesso mais rápido e uma experiência mais rica.
+
+Incluem informações como nome, autor, ícone(s), versão, descrição e lista de todos os recursos necessários, etc.
+
+#### Compatibilidade
+
+[Can I use Web App Manifest?](https://caniuse.com/#feat=web-app-manifest)
+
+#### Properties em `manifest.json`
+
+```js
+{
+  "name": "Swaty - Activity Tracker", // Nome completo do App (para Splashscreens)
+  "short_name": "Sweaty", // Nome abreviado do App (para Ícones)
+  "start_url": "/index.html", // Qual página carregar ao inicializar
+  "scope": ".", // Quais páginas estão incluídas na "PWA", pode ser utilizado para especificar determinadas funcionalidades somente
+  "display": "standalone", // Como deve ser exibida a App, com URL? sem URL? (ex: "minimal-ui") (default: standalone)
+  "background_color": "#fff", // Cor que será exibida no background do App ou em Splashscreen durante o carregamento
+  "theme_color": "#3F51B5", // Cor tema do App, aparece no toolbar, taskmanager, etc
+  "description": "", // Descreve sua aplicação, é utilizado quando precisa descrever a App (ex: adicionar aos favoritos)
+  "dir": "ltr", // Direção de leitura do App (ltr = left to right)
+  "lang": "en-US", // Define a linguagem padrão do App
+  "orientation": "portrait-primary", // Qual será a orientação padrão ao abrir a App (ex: "landscape")
+  "icons": [ // Permite configurar um conjunto de ícones (Ex: homescreen)
+    {
+      "src": "/src/images/icons/app-icon-48x48.png", // Path do ícone
+      "type": "image/png", // Image mymetype
+      "sizes": "48x48" // Icon size, o navegador escolhe o melhor size para o dispositivo
+    },
+    {
+      "src": "/src/images/icons/app-icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+  ],
+  "related_applications": [ // Aplicações **nativas** que podem estar relacionadas, à exemplo, caso a web app em si possua alguma app nativa na store
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.app1",
+      "id": "com.example.app1"
+    }
+  ]
+}
+```
+
+_Mais detalhes sobre todas as propriedades podem ser vistas aqui: [Web App Manifest @ MDN](https://developer.mozilla.org/en-US/docs/Web/Manifest)_
+
 ### Service Workers
 
 - Loaded JS runs on one single thread, attached to individual HTML pages
