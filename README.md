@@ -200,6 +200,14 @@ Atualmente suporta recursos como [notificações de push](https://developers.goo
 
 - [Is Service Worker ready?](https://jakearchibald.github.io/isserviceworkerready/)
 
+## Por quê suportar acesso offline?
+
+Eventualmente o usuário pode ficar com a conexão ruim ou sem conexão nenhuma.
+
+Exemplo 1: eventos de esportes em estádios, grande quantidade de pessoas no mesmo local.
+Exemplo 2: elevadores ou estacionamentos subterrâneos não há conexão durante alguns segundos ou minutos.
+Exemplo 3: _"lie-fie"_ conexões wi-fi conectadas, porém péssimas, como pode ser percebido em alguns Access Points publicos.
+
 ## Projeto
 
 Em `./social-media-app` está um projeto de uma PWA.
