@@ -163,38 +163,54 @@ Alguns critérios são requeridos, como nome da aplicação configurado, ícones
 
 - [Verificar requerimentos atualizados do Chrome](https://developers.google.com/web/fundamentals/app-install-banners/)
 
+### Service Workers
+
+[Introdução a Service Workers @ Google Web Fundamentals](https://developers.google.com/web/fundamentals/primers/service-workers/?hl=pt-br)
+
+### O que é?
+
+Um service worker é um script que executa em background, separado da thread responsável pela página da web, possibilitando que instruções sejam executadas feitos em paralelo à interação do usuário.
+
+Atualmente suporta recursos como [notificações de push](https://developers.google.com/web/updates/2015/03/push-notifications-on-the-open-web?hl=pt-br), [sincronização em background](https://developers.google.com/web/updates/2015/12/background-sync?hl=pt-br) e também tem a capacidade de interceptar e gerenciar requisições de rede podendo atuar com cache programático de respostas.
+
+#### Características importantes
+
+- É um [JavaScript Worker](https://www.html5rocks.com/en/tutorials/workers/basics/), portanto não consegue acessar o DOM diretamente. Em vez disso, um service worker se comunica através de mensagens enviadas através da interface `postMessage`;
+- É um proxy de rede programável, o que permite controlar requisições;
+- É encerrado quando ocioso e reiniciado quando necessário, ou seja, não se pode confiar em estado global destes workers. Para informações que devem ser mantidas entre reinicializações, deve ser utilizado [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API);
+- Utiliza bastante o recurso de Promises, [leia mais sobre aqui](https://developers.google.com/web/fundamentals/getting-started/primers/promises?hl=pt-br).
+
+#### Eventos
+
+![service worker events](./docs/service_worker_events.png)
+
+- `fetch` o navegador ou a página faz requisições
+- `push notifications` service worker recebe uma _web push notification_ de um servidor do browser
+- `notification interaction` o usuário interage com a notificação
+- `background sync` recebe um evento para de conexão com a internet reestabelecida, podendo efetuar uma sincrozanição de dados
+- `service worker lifecycle events` há também eventos conforme o ciclo de vida do worker
+
+#### Lifecycle
+
+![service worker lifecycle](./docs/service_worker_lifecycle.png)
+
+[Referências Developer Mozilla - Using Service Workers - Architecture](https://developer.mozilla.org/pt-BR/docs/Web/API/Service_Worker_API/Using_Service_Workers#Arquitetura_B%C3%A1sica)
+
+#### Quais navegadores suportam? _Compatibilidade_
+
+- [Is Service Worker ready?](https://jakearchibald.github.io/isserviceworkerready/)
+
 ## Projeto
 
 Em `./social-media-app` está um projeto de uma PWA.
 
 Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 2` através do Android Emulator do Android Studio. O IP para a máquina de dentro do dispositivo é `10.0.2.2`.
 
-### Service Workers
+### Modo Desenvolvedor do Dispositivo
 
-- Loaded JS runs on one single thread, attached to individual HTML pages
-- Service workers run on additional thread, decoupled from HTML pages
-  - Listen to specific events;
-  - Can manage ALL pages of given scope (e.g. all pages of a domain);
-  - Lives on even after pages have been closed, even after close the browser;
+Para ativar o modo desenvolvedor no dispositivo Android, deve clicar 7x no "Build Number" que pode ser acessado via _Settings > About > Build Number_
 
-### Can be used for
 
-- Caching/Offline support;
-- Enable other PWA features;
-- Web Push: mobile-like push notifications;
-- Background Synchronization: sync user data in background;
-- Application manifest: allow addition to homescreen;
-- Responsive design: app/layout should work and look good across devices;
-- Geolocation API: access user location;
-- Media API: access device camera and microphone;
-
-### "Listenable" Events (in Service Worker)
-
-- `Fetch` Browser or Page-related JavaScript initiates a Fetch (http-request);
-- `Push Notifications` Service Worker receives Web Push Notification (from browsers notifications Server);
-- `Notification Interaction` User interacts with displayed Notification;
-- `Background Sync` Service Worker receives Background Sync Event (e.g. Internet Connection was restored);
-- `Service Worker Lifecycle` Service Worker Phase changes
 
 ## Referências
 
@@ -203,7 +219,6 @@ Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 
 - [9 Examples of Brilliant Progressive Web Apps (PWAs)](https://www.biggerpicture.agency/insights/9-examples-of-brilliant-progressive-web-apps-pwas)
 - [Progressive Web App - The Complete Guide](https://www.udemy.com/progressive-web-app-pwa-the-complete-guide)
 - [manifest.json @ Mozilla Developer](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
-- [Is Service Worker ready?](https://jakearchibald.github.io/isserviceworkerready/)
 - [More about the "Web App Install Banner" (including Requirements)](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
 - [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
 - [MDN Article on the Web App Manifest (includes List of all Properties)](https://developer.mozilla.org/en-US/docs/Web/Manifest)
