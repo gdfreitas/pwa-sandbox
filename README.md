@@ -100,9 +100,8 @@ Página da extensão pode ser encontrada em: [Google Chrome Store - Lighthouse](
 
 ### Principais Pilares
 
-- **Service Workers**: é suportado por browsers modernos, e são basicamente JavaScript rodando em um processo em background, mesmo que a aplicação esteja fechada. É utilizado para caching de arquivos (acesso offline) e também para outras funcionalidades de PWAs, como **Background Synchronization** (sincronização de dados em background) como enviar requisições assim que a conexão for reestabelecida. **Web Push Notification** também são executadas em background para envio de notificações ao usuário.
-
-- **Application Manifest**: permite que a aplicação se torne "instalável* na homescreen a partir da aplicação desta funcionalidade.
+- [**Service Workers**](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API): em sua essencia atua como um servidor de proxy, situando-se entre uma aplicação web, o browser e a rede (quando disponível). É usado principalmente para prover experiência _offline_, interceptando requisições à rede e tomando ações baseado se o usuário tem ou não acesso rede. Também provê acesso à _push notifications_ envio de notificações ao usuário e _background sync APIs_ (sincronização de dados em background) como enviar requisições assim que a conexão for reestabelecida.
+- [**Application Manifest**](https://developer.mozilla.org/pt-BR/docs/Web/Manifest): permite que a aplicação se torne "instalável* na homescreen a partir da aplicação desta funcionalidade.
 - **Responsive Design**: layouts atrativos/usáveis em todos os dispositivos
 - **Geolocation API**: permite acessar a localização do usuário
 - **Media API**: permite acessar dispositivo de câmera e microfone
@@ -156,6 +155,20 @@ Incluem informações como nome, autor, ícone(s), versão, descrição e lista 
 
 _Mais detalhes sobre todas as propriedades podem ser vistas aqui: [Web App Manifest @ MDN](https://developer.mozilla.org/en-US/docs/Web/Manifest)_
 
+### Install Banner
+
+Este recurso ajuda a promover a instalação da web app no dispositivo do usuário através de um "pop up" do browser, fornecendo a possibilidade da instalação, em vez do  usuário ter que manualmente ir nas opções e clicar em "add to homescreen"
+
+Alguns critérios são requeridos, como nome da aplicação configurado, ícones, start_url, service workers instalados, servidos sobre o protocolo `https`, etc.
+
+- [Verificar requerimentos atualizados do Chrome](https://developers.google.com/web/fundamentals/app-install-banners/)
+
+## Projeto
+
+Em `./social-media-app` está um projeto de uma PWA.
+
+Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 2` através do Android Emulator do Android Studio. O IP para a máquina de dentro do dispositivo é `10.0.2.2`.
+
 ### Service Workers
 
 - Loaded JS runs on one single thread, attached to individual HTML pages
@@ -189,7 +202,7 @@ _Mais detalhes sobre todas as propriedades podem ser vistas aqui: [Web App Manif
 - [The 2015 U.S. Mobile App Report @ comScore](https://www.comscore.com/Insights/Presentations-and-Whitepapers/2015/The-2015-US-Mobile-App-Report)
 - [9 Examples of Brilliant Progressive Web Apps (PWAs)](https://www.biggerpicture.agency/insights/9-examples-of-brilliant-progressive-web-apps-pwas)
 - [Progressive Web App - The Complete Guide](https://www.udemy.com/progressive-web-app-pwa-the-complete-guide)
-- [`manifest.json @ Mozilla Developer`](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
+- [manifest.json @ Mozilla Developer](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
 - [Is Service Worker ready?](https://jakearchibald.github.io/isserviceworkerready/)
 - [More about the "Web App Install Banner" (including Requirements)](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
 - [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
@@ -200,3 +213,4 @@ _Mais detalhes sobre todas as propriedades podem ser vistas aqui: [Web App Manif
 - [Setting up Remote Debugging on Chrome](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
 - [Getting that "Web App Install Banner"](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
 - [Getting Started with Service Workers (don't read too far, there's stuff in there we'll learn later ;-))](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
+- [What's the difference between "service workers" and "web workers" in JavaScript?](https://www.quora.com/Whats-the-difference-between-service-workers-and-web-workers-in-JavaScript)
