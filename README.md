@@ -210,8 +210,6 @@ Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 
 
 Para ativar o modo desenvolvedor no dispositivo Android, deve clicar 7x no "Build Number" que pode ser acessado via _Settings > About > Build Number_
 
-
-
 ## Referências
 
 - [Mobile Web vs Native App](https://medium.com/@vivekmadurai/mobile-web-vs-native-app-2651b6b06f4d#targetText=There%20are%20two%20popular%20ways%20to%20build%20mobile%20application.&targetText=We%20all%20know%20users%20are,to%20browsing%20app%20via%20browsers.&targetText=Even%20though%20mobile%20web%20sees,them(right%20side%20graph))
@@ -223,9 +221,19 @@ Para ativar o modo desenvolvedor no dispositivo Android, deve clicar 7x no "Buil
 - [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
 - [MDN Article on the Web App Manifest (includes List of all Properties)](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Web App Manifest - Browser Support](http://caniuse.com/#feat=web-app-manifest)
-- [App Install Banner - Google Developers](https://developers.google.com/web/fundamentals/app-install-banners/)
 - [Are Service Workers Ready? - Check Browser Support](https://jakearchibald.github.io/isserviceworkerready/)
 - [Setting up Remote Debugging on Chrome](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
-- [Getting that "Web App Install Banner"](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
 - [Getting Started with Service Workers (don't read too far, there's stuff in there we'll learn later ;-))](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
 - [What's the difference between "service workers" and "web workers" in JavaScript?](https://www.quora.com/Whats-the-difference-between-service-workers-and-web-workers-in-JavaScript)
+
+### Promises
+
+- [Introduction to Promises (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [Introduction to Promises (Google)](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+
+### Fetch APIs
+
+- [An Overview on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Detailed Usage Guide (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+- [Detailed Usage Guide (and comparison with XMLHttpRequest)](https://davidwalsh.name/fetch)
+- [Introduction to Fetch (Google)](https://developers.google.com/web/updates/2015/03/introduction-to-fetch)
