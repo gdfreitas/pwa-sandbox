@@ -4,6 +4,37 @@ var CACHE = {
   DYNAMIC_NAME: `dynamic-v${appVersion}`
 }
 
+var STATIC_FILES = [
+  '/',
+  '/index.html',
+  '/offline.html',
+  '/src/js/app.js',
+  '/src/js/feed.js',
+  '/src/js/polyfills/fetch.js',
+  '/src/js/polyfills/promise.js',
+  '/src/js/material.min.js',
+  '/src/css/app.css',
+  '/src/css/feed.css',
+  '/src/images/main-image.jpg',
+  'https://fonts.googleapis.com/css?family=Roboto:400,700',
+  'https://fonts.googleapis.com/icon?family=Material+Icons',
+  'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
+]
+
+function trimCache(cacheName, maxItems) {
+  caches.open(cacheName)
+    .then(function (cache) {
+      return cache.keys()
+        .then(function (keys) {
+          if (keys.length > maxItems) {
+            return cache.delete(keys[0])
+              .then(trimCache(cacheName, maxItems))
+          }
+        })
+    })
+
+}
+
 self.addEventListener('install', function (event) {
   console.log('[Service Worker] Installing Service Worker...', event)
 
@@ -14,22 +45,7 @@ self.addEventListener('install', function (event) {
 
         // O método "add" obtém o arquivo do servidor e adiciona ao cache
         // (é simular ao combo de fetch + cache.put)
-        cache.addAll([
-          '/',
-          '/index.html',
-          '/offline.html',
-          '/src/js/app.js',
-          '/src/js/feed.js',
-          '/src/js/polyfills/fetch.js',
-          '/src/js/polyfills/promise.js',
-          '/src/js/material.min.js',
-          '/src/css/app.css',
-          '/src/css/feed.css',
-          '/src/images/main-image.jpg',
-          'https://fonts.googleapis.com/css?family=Roboto:400,700',
-          'https://fonts.googleapis.com/icon?family=Material+Icons',
-          'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
-        ])
+        cache.addAll(STATIC_FILES)
 
       })
       .catch(function (err) {
@@ -54,6 +70,20 @@ self.addEventListener('activate', function (event) {
   return self.clients.claim();
 })
 
+function isInArray(string, array) {
+  var cachePath;
+  // request targets domain where we serve the page from (i.e. NOT a CDN)
+  if (string.indexOf(self.origin) === 0) {
+    console.log('matched ', string);
+    // take the part of the URL AFTER the domain (e.g. after localhost:8080)
+    cachePath = string.substring(self.origin.length);
+  } else {
+    // store the full request (for CDNs)
+    cachePath = string;
+  }
+  return array.indexOf(cachePath) > -1;
+}
+
 /**
  * Cache then Network Strategy
  */
@@ -66,11 +96,15 @@ self.addEventListener('fetch', function (event) {
         .then(function (cache) {
           return fetch(event.request)
             .then(function (response) {
+              trimCache(CACHE.DYNAMIC_NAME, 3);
               cache.put(event.request, response.clone());
               return response;
             })
         })
     )
+
+  } else if (isInArray(event.request.url, STATIC_FILES)) {
+    event.respondWith(caches.match(event.request))
   } else {
     event.respondWith(
       caches
@@ -87,6 +121,7 @@ self.addEventListener('fetch', function (event) {
             .then(function (originResponse) {
               caches.open(CACHE.DYNAMIC_NAME)
                 .then(function (cache) {
+                  trimCache(CACHE.DYNAMIC_NAME, 3);
                   cache.put(event.request.url, originResponse.clone())
                   return originResponse;
                 })
@@ -94,7 +129,9 @@ self.addEventListener('fetch', function (event) {
             .catch(function (err) {
               return caches.open(CACHE.STATIC_NAME)
                 .then(function (cache) {
-                  return cache.match('/offline.html');
+                  if (event.request.headers.get('accept').includes('text/html')) {
+                    return cache.match('/offline.html');
+                  }
                 })
             });
         })
