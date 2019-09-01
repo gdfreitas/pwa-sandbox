@@ -208,9 +208,87 @@ Exemplo 1: eventos de esportes em estádios, grande quantidade de pessoas no mes
 Exemplo 2: elevadores ou estacionamentos subterrâneos não há conexão durante alguns segundos ou minutos.
 Exemplo 3: _"lie-fie"_ conexões wi-fi conectadas, porém péssimas, como pode ser percebido em alguns Access Points publicos.
 
+### Cache API
+
+Pode ser acessado por service workers ou via scripts, permitindo que arquivos possam ser obtidos do cache ao invés da rede.
+
+Formato: `Key: Request` e `Value: Response`
+
+Documentação: [Cache API @ Mozilla Developer](https://developer.mozilla.org/pt-BR/docs/Web/API/Cache)
+
+### Utilizando recursos de cache
+
+#### Static Caching (pre-caching)
+
+São arquivos pré definidos, sendo eles triviais para a aplicação funcionar, são os que compõe o _app shell_, a base do webapp (index.html, estilos, fontes).
+
+Em `sw.js`
+
+```js
+self.addEventListener('install', function (event) {
+  console.log('[Service Worker] Installing Service Worker...', event)
+
+  event.waitUntil(
+    caches.open('static')
+      .then(function (cache) {
+        console.log('[Service Worker] Pre Caching App Shell')
+
+        // O método "add" obtém o arquivo do servidor e adiciona ao cache
+        // (é simular ao combo de fetch + cache.put)
+        cache.addAll([
+          '/',
+          '/index.html',
+          '/help/index.html',
+          '/src/js/app.js',
+          '/src/js/feed.js',
+          '/src/js/polyfills/fetch.js',
+          '/src/js/polyfills/promise.js',
+          '/src/js/material.min.js',
+          '/src/css/app.css',
+          '/src/css/feed.css',
+          '/src/images/main-image.jpg',
+          'https://fonts.googleapis.com/css?family=Roboto:400,700',
+          'https://fonts.googleapis.com/icon?family=Material+Icons',
+          'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
+        ])
+
+      })
+      .catch(function (err) {
+        console.log(`erro`, err)
+      })
+  )
+})
+```
+
+```js
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches
+      .match(event.request)
+      .then(function (response) {
+
+        if (response) {
+          console.log('[Service Worker] Found in cache', event.request.url);
+          return response;
+        }
+
+        // Nota-se aqui que quando não encontra no cache não irá lançar erros (não irá cair num catch)
+        console.log('[Service Worker] Fetching from origin', event.request.url);
+        return fetch(event.request);
+      })
+  )
+})
+```
+
+#### Dynamic Caching
+
+Adiciona dinamicamente _responses_ ao cache, conforme utilização da webapp, via interceptação do `fetch`.
+
+
+
 ## Projeto
 
-Em `./social-media-app` está um projeto de uma PWA.
+Em `./social-media-app` está um projeto de webapp para postagens de fotos, assim como o Instagram, para aplicar técnicas de PWA.
 
 Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 2` através do Android Emulator do Android Studio. O IP para a máquina de dentro do dispositivo é `10.0.2.2`.
 
