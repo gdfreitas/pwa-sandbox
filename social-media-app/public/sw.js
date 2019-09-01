@@ -1,4 +1,4 @@
-var appVersion = 1;
+var appVersion = 5;
 var CACHE = {
   STATIC_NAME: `static-v${appVersion}`,
   DYNAMIC_NAME: `dynamic-v${appVersion}`
@@ -17,8 +17,7 @@ self.addEventListener('install', function (event) {
         cache.addAll([
           '/',
           '/index.html',
-          '/help',
-          '/help/index.html',
+          '/offline.html',
           '/src/js/app.js',
           '/src/js/feed.js',
           '/src/js/polyfills/fetch.js',
@@ -71,6 +70,7 @@ self.addEventListener('fetch', function (event) {
         }
 
         console.log('[Service Worker] Fetching from origin', event.request.url);
+
         return fetch(event.request)
           .then(function (originResponse) {
             caches.open(CACHE.DYNAMIC_NAME)
@@ -80,7 +80,10 @@ self.addEventListener('fetch', function (event) {
               })
           })
           .catch(function (err) {
-
+            return caches.open(CACHE.STATIC_NAME)
+              .then(function (cache) {
+                return cache.match('/offline.html');
+              })
           });
       })
   )

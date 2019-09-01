@@ -30,35 +30,65 @@ shareImageButton.addEventListener('click', openCreatePostModal);
 
 closeCreatePostModalButton.addEventListener('click', closeCreatePostModal);
 
+// function onSaveButtonClicked(event) {
+//   console.log('clicked');
+
+//   if ('caches' in window) {
+//     caches.open('user-requested')
+//       .then(function (cache) {
+//         cache.add('http://httpbin.org/get')
+//         cache.add('/src/images/sf-boat.jpg')
+//       })
+//   }
+// }
+
 function createCard() {
   var cardWrapper = document.createElement('div');
   cardWrapper.className = 'shared-moment-card mdl-card mdl-shadow--2dp';
+
   var cardTitle = document.createElement('div');
   cardTitle.className = 'mdl-card__title';
   cardTitle.style.backgroundImage = 'url("/src/images/sf-boat.jpg")';
   cardTitle.style.backgroundSize = 'cover';
   cardTitle.style.height = '180px';
   cardWrapper.appendChild(cardTitle);
+
   var cardTitleTextElement = document.createElement('h2');
   cardTitleTextElement.style.color = '#c3c3c3';
   cardTitleTextElement.className = 'mdl-card__title-text';
   cardTitleTextElement.textContent = 'San Francisco Trip';
   cardTitle.appendChild(cardTitleTextElement);
+
   var cardSupportingText = document.createElement('div');
   cardSupportingText.className = 'mdl-card__supporting-text';
   cardSupportingText.textContent = 'In San Francisco';
   cardSupportingText.style.textAlign = 'center';
+
+  // var cardSaveButton = document.createElement('button');
+  // cardSaveButton.textContent = 'Save';
+  // cardSaveButton.addEventListener('click', onSaveButtonClicked)
+  // cardSupportingText.appendChild(cardSaveButton);
+
   cardWrapper.appendChild(cardSupportingText);
   componentHandler.upgradeElement(cardWrapper);
   sharedMomentsArea.appendChild(cardWrapper);
 }
 
-let promise = new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    resolve();
-  }, 500);
-});
 
-promise.then(function (data) {
-  createCard();
-});
+fetch('http://httpbin.org/get')
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    createCard();
+  });
+
+// let promise = new Promise(function (resolve, reject) {
+//   setTimeout(function () {
+//     resolve();
+//   }, 500);
+// });
+
+// promise.then(function (data) {
+//   createCard();
+// });
