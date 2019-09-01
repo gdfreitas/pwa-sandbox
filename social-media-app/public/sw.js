@@ -1,4 +1,4 @@
-var appVersion = 5;
+var appVersion = 10;
 var CACHE = {
   STATIC_NAME: `static-v${appVersion}`,
   DYNAMIC_NAME: `dynamic-v${appVersion}`
@@ -54,37 +54,129 @@ self.addEventListener('activate', function (event) {
   return self.clients.claim();
 })
 
+/**
+ * Cache then Network Strategy
+ */
 self.addEventListener('fetch', function (event) {
-  // console.log('[Service Worker] Intercepting request for something...', event.request.url);
+  const url = 'http://httpbin.org/get';
 
-  // Mantém o comportamento padrão
-  // event.respondWith(fetch(event.request));
+  if (event.request.url.indexOf(url) > -1) {
+    event.respondWith(
+      caches.open(CACHE.DYNAMIC_NAME)
+        .then(function (cache) {
+          return fetch(event.request)
+            .then(function (response) {
+              cache.put(event.request, response.clone());
+              return response;
+            })
+        })
+    )
+  } else {
+    event.respondWith(
+      caches
+        .match(event.request)
+        .then(function (response) {
+          if (response) {
+            console.log('[Service Worker] Found in cache', event.request.url);
+            return response;
+          }
 
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then(function (response) {
-        if (response) {
-          console.log('[Service Worker] Found in cache', event.request.url);
-          return response;
-        }
+          console.log('[Service Worker] Fetching from origin', event.request.url);
 
-        console.log('[Service Worker] Fetching from origin', event.request.url);
-
-        return fetch(event.request)
-          .then(function (originResponse) {
-            caches.open(CACHE.DYNAMIC_NAME)
-              .then(function (cache) {
-                cache.put(event.request.url, originResponse.clone())
-                return originResponse;
-              })
-          })
-          .catch(function (err) {
-            return caches.open(CACHE.STATIC_NAME)
-              .then(function (cache) {
-                return cache.match('/offline.html');
-              })
-          });
-      })
-  )
+          return fetch(event.request)
+            .then(function (originResponse) {
+              caches.open(CACHE.DYNAMIC_NAME)
+                .then(function (cache) {
+                  cache.put(event.request.url, originResponse.clone())
+                  return originResponse;
+                })
+            })
+            .catch(function (err) {
+              return caches.open(CACHE.STATIC_NAME)
+                .then(function (cache) {
+                  return cache.match('/offline.html');
+                })
+            });
+        })
+    )
+  }
 })
+
+/**
+ * Cache with Network Fallback Strategy
+ */
+// self.addEventListener('fetch', function (event) {
+//   // console.log('[Service Worker] Intercepting request for something...', event.request.url);
+
+//   // Mantém o comportamento padrão
+//   // event.respondWith(fetch(event.request));
+
+//   event.respondWith(
+//     caches
+//       .match(event.request)
+//       .then(function (response) {
+//         if (response) {
+//           console.log('[Service Worker] Found in cache', event.request.url);
+//           return response;
+//         }
+
+//         console.log('[Service Worker] Fetching from origin', event.request.url);
+
+//         return fetch(event.request)
+//           .then(function (originResponse) {
+//             caches.open(CACHE.DYNAMIC_NAME)
+//               .then(function (cache) {
+//                 cache.put(event.request.url, originResponse.clone())
+//                 return originResponse;
+//               })
+//           })
+//           .catch(function (err) {
+//             return caches.open(CACHE.STATIC_NAME)
+//               .then(function (cache) {
+//                 return cache.match('/offline.html');
+//               })
+//           });
+//       })
+//   )
+// })
+
+/**
+ * Network with Cache (with dynamic caching) Fallback Strategy
+ */
+// self.addEventListener('fetch', function (event) {
+//   event.respondWith(
+//     fetch(event.request)
+//       .then(function (originResponse) {
+//         caches.open(CACHE.DYNAMIC_NAME)
+//           .then(function (cache) {
+//             cache.put(event.request.url, originResponse.clone())
+//             return originResponse;
+//           })
+//       })
+//       .catch(function (err) {
+//         return caches.match(event.request);
+//       })
+//   )
+// })
+
+/**
+ * Cache Only Strategy
+ */
+// self.addEventListener('fetch', function (event) {
+//   // console.log('[Service Worker] Intercepting request for something...', event.request.url);
+
+//   event.respondWith(
+//     caches.match(event.request)
+//   )
+// })
+
+/**
+ * Network Only Strategy
+ */
+// self.addEventListener('fetch', function (event) {
+//   // console.log('[Service Worker] Intercepting request for something...', event.request.url);
+
+//   event.respondWith(
+//     fetch(event.request)
+//   )
+// })
