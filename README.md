@@ -155,6 +155,11 @@ Incluem informações como nome, autor, ícone(s), versão, descrição e lista 
 
 _Mais detalhes sobre todas as propriedades podem ser vistas aqui: [Web App Manifest @ MDN](https://developer.mozilla.org/en-US/docs/Web/Manifest)_
 
+- [manifest.json @ Mozilla Developer](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
+- [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
+- [MDN Article on the Web App Manifest (includes List of all Properties)](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- [Web App Manifest - Browser Support](http://caniuse.com/#feat=web-app-manifest)
+
 ### Install Banner
 
 Este recurso ajuda a promover a instalação da web app no dispositivo do usuário através de um "pop up" do browser, fornecendo a possibilidade da instalação, em vez do  usuário ter que manualmente ir nas opções e clicar em "add to homescreen"
@@ -162,12 +167,13 @@ Este recurso ajuda a promover a instalação da web app no dispositivo do usuár
 Alguns critérios são requeridos, como nome da aplicação configurado, ícones, start_url, service workers instalados, servidos sobre o protocolo `https`, etc.
 
 - [Verificar requerimentos atualizados do Chrome](https://developers.google.com/web/fundamentals/app-install-banners/)
+- [More about the "Web App Install Banner" (including Requirements)](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
 
 ### Service Workers
 
 [Introdução a Service Workers @ Google Web Fundamentals](https://developers.google.com/web/fundamentals/primers/service-workers/?hl=pt-br)
 
-### O que é?
+#### O que é?
 
 Um service worker é um script que executa em background, separado da thread responsável pela página da web, possibilitando que instruções sejam executadas feitos em paralelo à interação do usuário.
 
@@ -199,6 +205,8 @@ Atualmente suporta recursos como [notificações de push](https://developers.goo
 #### Quais navegadores suportam? _Compatibilidade_
 
 - [Is Service Worker ready?](https://jakearchibald.github.io/isserviceworkerready/)
+- [Getting Started with Service Workers (don't read too far, there's stuff in there we'll learn later ;-))](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
+- [What's the difference between "service workers" and "web workers" in JavaScript?](https://www.quora.com/Whats-the-difference-between-service-workers-and-web-workers-in-JavaScript)
 
 ## Por quê suportar acesso offline?
 
@@ -384,6 +392,19 @@ self.addEventListener('fetch', function (event) {
 - [Learn more about Service Workers](https://developer.mozilla.org/en/docs/Web/API/Service_Worker_API)
 - [Google's Introduction to Service Workers](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
 
+#### Promises
+
+- [Introduction to Promises (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [Introduction to Promises (Google)](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+
+#### Fetch API
+
+- [An Overview on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Detailed Usage Guide (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+- [Detailed Usage Guide (and comparison with XMLHttpRequest)](https://davidwalsh.name/fetch)
+- [Introduction to Fetch (Google)](https://developers.google.com/web/updates/2015/03/introduction-to-fetch)
+
+
 ### IndexedDB and Dynamic Data
 
 Qual a diferença entre **Dynamic Caching** e **Caching Dynamic Content**?
@@ -391,6 +412,51 @@ Qual a diferença entre **Dynamic Caching** e **Caching Dynamic Content**?
 - **Dynamic Caching** utiliza a [Cache API](https://developer.mozilla.org/pt-BR/docs/Web/API/Cache) para armazenar **Responses** (respostas) de requests assim que forem realizadas e interceptadas pelo service worker, seja por meio de pré-caching ou conforme solicitado durante o uso do app, os tipos de arquivos são geralmente arquivos de scripts, estilos e imagens.
 
 - **Caching Dynamic Content** utiliza o [IndexedDB](https://developer.mozilla.org/pt-BR/docs/IndexedDB) para armazenar tipos de dados geralmente dinâmicos, que alteram frequentemente, sendo tipicamente no formato JSON, mas também pode ser XML.
+
+- [IndexedDB Browser Support](http://caniuse.com/#feat=indexeddb)
+- [IDB on Github](https://github.com/jakearchibald/idb)
+- [IndexedDB explained on MDN](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+- [Alternative to IDB](http://dexie.org/)
+
+### Responsive Design
+
+- [Responsive Design Basics by Google](https://developers.google.com/web/fundamentals/design-and-ui/responsive/)
+- [Responsive Design Patterns (Google)](https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns)
+- [Responsive Images (Google)](https://developers.google.com/web/fundamentals/design-and-ui/responsive/images)
+- [Using CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
+- [Responsive Images (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+- [Responsive Images in CSS](https://css-tricks.com/responsive-images-css/)
+- [Using CSS Animations](http://learn.shayhowe.com/advanced-html-css/transitions-animations/)
+
+### Background Synchronization
+
+- [Introducing Background Sync](https://developers.google.com/web/updates/2015/12/background-sync)
+- [A Basic Guide to Background Sync](https://ponyfoo.com/articles/backgroundsync)
+- [More about Firebase Cloud Functions](https://firebase.google.com/docs/functions/)
+
+### Web Push Notifications
+
+- [More about Web Push by Google](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/)
+- [More about VAPID](https://blog.mozilla.org/services/2016/04/04/using-vapid-with-webpush/)
+- [More about VAPID by Google](https://developers.google.com/web/updates/2016/07/web-push-interop-wins)
+- [The web-push npm Package](https://github.com/web-push-libs/web-push)
+- [More about showNotification (display Notifications from Service Workers)](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
+- [The Notification API](https://developer.mozilla.org/en/docs/Web/API/notification)
+- [The Push API](https://developer.mozilla.org/en/docs/Web/API/Push_API)
+
+### Native Device Features
+
+- [More about the Media Stream API on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API/Constraints)
+- [More about getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
+- [How to use geolocation](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation)
+
+### Service Worker Management with **Workbox**
+
+- [Official webpage/ docs](https://workboxjs.org/)
+- [Configuring Workbox](https://workboxjs.org/reference-docs/latest/module-workbox-build.html#.Configuration)
+- [More about Workbox Strategies](https://workboxjs.org/reference-docs/latest/module-workbox-sw.Strategies.html#main)
+- [Workbox Github page](https://github.com/GoogleChrome/workbox)
+- [Workbox Overview by Google](https://developers.google.com/web/tools/workbox/)
 
 ## Projeto
 
@@ -402,30 +468,11 @@ Para simular em um dispositivo android, estarei utilizando o dispositivo `Pixel 
 
 Para ativar o modo desenvolvedor no dispositivo Android, deve clicar 7x no "Build Number" que pode ser acessado via _Settings > About > Build Number_
 
+- [Setting up Remote Debugging on Chrome](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
+
 ## Referências
 
 - [Mobile Web vs Native App](https://medium.com/@vivekmadurai/mobile-web-vs-native-app-2651b6b06f4d#targetText=There%20are%20two%20popular%20ways%20to%20build%20mobile%20application.&targetText=We%20all%20know%20users%20are,to%20browsing%20app%20via%20browsers.&targetText=Even%20though%20mobile%20web%20sees,them(right%20side%20graph))
 - [The 2015 U.S. Mobile App Report @ comScore](https://www.comscore.com/Insights/Presentations-and-Whitepapers/2015/The-2015-US-Mobile-App-Report)
 - [9 Examples of Brilliant Progressive Web Apps (PWAs)](https://www.biggerpicture.agency/insights/9-examples-of-brilliant-progressive-web-apps-pwas)
 - [Progressive Web App - The Complete Guide](https://www.udemy.com/progressive-web-app-pwa-the-complete-guide)
-- [manifest.json @ Mozilla Developer](https://developer.mozilla.org/pt-BR/docs/Web/Manifest)
-- [More about the "Web App Install Banner" (including Requirements)](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/)
-- [A detailed Web App Manifest Explanation by Google](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
-- [MDN Article on the Web App Manifest (includes List of all Properties)](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- [Web App Manifest - Browser Support](http://caniuse.com/#feat=web-app-manifest)
-- [Are Service Workers Ready? - Check Browser Support](https://jakearchibald.github.io/isserviceworkerready/)
-- [Setting up Remote Debugging on Chrome](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
-- [Getting Started with Service Workers (don't read too far, there's stuff in there we'll learn later ;-))](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
-- [What's the difference between "service workers" and "web workers" in JavaScript?](https://www.quora.com/Whats-the-difference-between-service-workers-and-web-workers-in-JavaScript)
-
-### Promises
-
-- [Introduction to Promises (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-- [Introduction to Promises (Google)](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
-
-### Fetch APIs
-
-- [An Overview on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-- [Detailed Usage Guide (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-- [Detailed Usage Guide (and comparison with XMLHttpRequest)](https://davidwalsh.name/fetch)
-- [Introduction to Fetch (Google)](https://developers.google.com/web/updates/2015/03/introduction-to-fetch)
