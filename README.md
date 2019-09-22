@@ -458,6 +458,15 @@ Qual a diferença entre **Dynamic Caching** e **Caching Dynamic Content**?
 - [Workbox Github page](https://github.com/GoogleChrome/workbox)
 - [Workbox Overview by Google](https://developers.google.com/web/tools/workbox/)
 
+## SPAs and PWAs
+
+- [create-react-app Page](https://github.com/facebookincubator/create-react-app)
+- [Angular CLI Github Page](https://github.com/angular/angular-cli)
+- [Overview over Angular Service Worker Usage](https://fluin.io/blog/angular-service-worker)
+- [PWAs with Angular](https://medium.com/@amcdnl/service-worker-pwas-with-the-angular-cli-98a8f16d62d6)
+- [Vue CLI PWA Template Page](https://github.com/vuejs-templates/pwa)
+- [More about sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin)
+
 ## Projeto
 
 Em `./social-media-app` está um projeto de webapp para postagens de fotos, assim como o Instagram, para aplicar técnicas de PWA.
