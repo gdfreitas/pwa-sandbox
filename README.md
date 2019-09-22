@@ -384,6 +384,14 @@ self.addEventListener('fetch', function (event) {
 - [Learn more about Service Workers](https://developer.mozilla.org/en/docs/Web/API/Service_Worker_API)
 - [Google's Introduction to Service Workers](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)
 
+### IndexedDB and Dynamic Data
+
+Qual a diferença entre **Dynamic Caching** e **Caching Dynamic Content**?
+
+- **Dynamic Caching** utiliza a [Cache API](https://developer.mozilla.org/pt-BR/docs/Web/API/Cache) para armazenar **Responses** (respostas) de requests assim que forem realizadas e interceptadas pelo service worker, seja por meio de pré-caching ou conforme solicitado durante o uso do app, os tipos de arquivos são geralmente arquivos de scripts, estilos e imagens.
+
+- **Caching Dynamic Content** utiliza o [IndexedDB](https://developer.mozilla.org/pt-BR/docs/IndexedDB) para armazenar tipos de dados geralmente dinâmicos, que alteram frequentemente, sendo tipicamente no formato JSON, mas também pode ser XML.
+
 ## Projeto
 
 Em `./social-media-app` está um projeto de webapp para postagens de fotos, assim como o Instagram, para aplicar técnicas de PWA.
